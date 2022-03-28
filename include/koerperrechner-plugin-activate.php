@@ -5,7 +5,7 @@
 
  class koerperrechnerPluginActivate
  {
-     public static function acitvate(){
+     public static function activate(){
          flush_rewrite_rules(  );
      }
  }
