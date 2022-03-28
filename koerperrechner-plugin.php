@@ -33,16 +33,24 @@ defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
 class koerperrechnerPlugin
 {
+    function __construct(){
+        add_action( 'init', array( $this, 'custom_post_type'));
+    }
     function activate() {
-        echo 'The Plugin was activated';
+        
     }
 
     function deactivate() {
-        echo 'The Plugin was deactivated';
+       
     }
     function unistall () {
 
     }
+
+    function custom_post_type() {
+        register_post_type( 'book', ['public' => true, 'label' => 'Books' ] );
+    }
+
  
 }
 
