@@ -37,25 +37,29 @@ class koerperrechnerPlugin
         add_action( 'init', array( $this, 'custom_post_type'));
     }
     function activate() {
-        
+        $this->custom_post_type();
+        flush_rewrite_rules( );
     }
 
     function deactivate() {
-       
-    }
-    function unistall () {
-
+        flush_rewrite_rules( );
     }
 
     function custom_post_type() {
         register_post_type( 'book', ['public' => true, 'label' => 'Books' ] );
     }
-
+    function enqueue() {
+        wp_enqueue_style( 'mypluginstyle', plugins_url( '/assests/style.css', __FILE__ ));
+    }
+    function register() {
+        add_action('admin_enqueue_scripts', array($this, 'enqueue') );
+    }
  
 }
 
 if ( class_exists('koerperrechnerPlugin')){
 $koerperrechnerPlugin = new koerperrechnerPlugin(); 
+$koerperrechnerPlugin->register();
 }
 
 register_activation_hook( __FILE__, array($koerperrechnerPlugin, 'activate' ) );
