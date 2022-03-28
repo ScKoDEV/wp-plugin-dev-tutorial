@@ -29,19 +29,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-if (! definded ('ABSPATH')) {
-    echo 'Can\t touch this!';
-    die;
-}
+defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
 class koerperrechnerPlugin
 {
-    function __construct($string) {
-        echo $string;
+    function activate() {
+        echo 'The Plugin was activated';
     }
+
+    function deactivate() {
+        echo 'The Plugin was deactivated';
+    }
+    function unistall () {
+
+    }
+ 
 }
 
 if ( class_exists('koerperrechnerPlugin')){
-$koerperrechnerPlugin = new koerperrechnerPlugin('Plugin initialized' ); 
+$koerperrechnerPlugin = new koerperrechnerPlugin(); 
 }
+
+register_activation_hook( __FILE__, array($koerperrechnerPlugin, 'activate' ) );
+
+register_deactivation_hook( __FILE__, array($koerperrechnerPlugin, 'deactivate' ) );
+
+
 
