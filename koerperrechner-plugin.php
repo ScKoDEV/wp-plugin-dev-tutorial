@@ -33,16 +33,24 @@ defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
 class koerperrechnerPlugin
 {
+    //Public
+    // can be accessed everywhere | default value
+
+    // Protected
+    // can be accessed only within the class itself or a class which extends the class
+
+    //Private
+    // can be accessed only by the class not by an extension
+
+    //static
+    // allows using function without initialization of class
+
     function __construct(){
-        add_action( 'init', array( $this, 'custom_post_type'));
-    }
-    function activate() {
-        $this->custom_post_type();
-        flush_rewrite_rules( );
+        $this->create_post_type();
     }
 
-    function deactivate() {
-        flush_rewrite_rules( );
+    protected function create_post_type(){
+        add_action( 'init', array( $this, 'custom_post_type'));
     }
 
     function custom_post_type() {
@@ -50,7 +58,9 @@ class koerperrechnerPlugin
     }
     function enqueue() {
         wp_enqueue_style( 'mypluginstyle', plugins_url( '/assests/style.css', __FILE__ ));
+        wp_enqueue_script( 'mypluginscript', plugins_url( '/assests/script.css', __FILE__ ));
     }
+    //admin_enqueue_scripts für admin css and wp_enqueue_scripts für frontend
     function register() {
         add_action('admin_enqueue_scripts', array($this, 'enqueue') );
     }
@@ -62,9 +72,11 @@ $koerperrechnerPlugin = new koerperrechnerPlugin();
 $koerperrechnerPlugin->register();
 }
 
-register_activation_hook( __FILE__, array($koerperrechnerPlugin, 'activate' ) );
+require_once plugin_dir_path(__FILE__) . 'include/koerperrechner-plugin-activate.php';
+register_activation_hook( __FILE__, array('koerperrechnerPluginActivate', 'activate' ) );
 
-register_deactivation_hook( __FILE__, array($koerperrechnerPlugin, 'deactivate' ) );
+require_once plugin_dir_path(__FILE__) . 'include/koerperrechner-plugin-deactivate.php';
+register_deactivation_hook( __FILE__, array('koerperrechnerPluginDeactivate', 'deactivate' ) );
 
 
 
