@@ -31,6 +31,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
+if (file_exists( dirname(__FILE__) . '/vendor/autoload.php')){
+    require_once dirname(__FILE__) . '/vendor/autoload.php';
+}
+
+use Include\Activate;
+
 class koerperrechnerPlugin
 {
     //Public
@@ -84,8 +90,13 @@ class koerperrechnerPlugin
         wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/style.css', __FILE__ ));
         wp_enqueue_script( 'mypluginscript', plugins_url( '/assets/script.css', __FILE__ ));
     }
+
+    function activate() {
+        Activate::activate();
+    }
  
 }
+
 
 if ( class_exists('koerperrechnerPlugin')){
 $koerperrechnerPlugin = new koerperrechnerPlugin(); 

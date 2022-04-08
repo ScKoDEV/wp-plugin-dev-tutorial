@@ -1,0 +1,17 @@
+{
+    "name": "konstantinschiller/koerperrechner-plugin",
+    "description": "Tutorial Plugin",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "ScKoDEV",
+            "email": "konstantinschiller@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4":{"Include\\":"./include"}
+    }
+}

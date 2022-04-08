@@ -3,7 +3,9 @@
  * @package KoerperrechnerPlugin
  */
 
- class koerperrechnerPluginActivate
+ namespace Include;
+
+ class Activate
  {
      public static function activate(){
          flush_rewrite_rules(  );
