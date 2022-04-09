@@ -29,14 +29,33 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+// IF this file is called firectly, abort!!!
 defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
+// require once the composer autoload
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php')){
     require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
+// define constants
 define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ));
+define( 'PLUGIN', plugin_basename( __FILE__ ));
+
+/**
+ * The code which runs during plugin activation
+ */
+
+function activate_koerperrechner_plugin(){
+    Inc\Base\Activate::activate();
+}
+
+function deactivate_koerperrechner_plugin(){
+    Inc\Base\Deactivate::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_koerperrechner_plugin' );
+register_deactivation_hook( __FILE__, 'deactivate_koerperrechner_plugin' );
 
 if ( class_exists('Inc\\Init')){
     Inc\Init::register_services();
