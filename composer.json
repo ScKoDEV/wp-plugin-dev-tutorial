@@ -12,6 +12,6 @@
     "minimum-stability": "dev",
     "require": {},
     "autoload":{
-        "psr-4":{"Include\\":"./include"}
+        "psr-4":{"Inc\\": "./include"}
     }
 }

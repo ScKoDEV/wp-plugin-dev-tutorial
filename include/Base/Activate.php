@@ -3,9 +3,11 @@
  * @package KoerperrechnerPlugin
  */
 
- class koerperrechnerPluginDeactivate
+namespace Inc\Base;
+
+ class Activate
  {
-     public static function deactivate(){
+     public static function activate(){
          flush_rewrite_rules(  );
      }
  }
