@@ -12,4 +12,3 @@ Full list of sections and features we will build during the series of tutorials.
 * Ajax based Login/Register system
 * Membership protected area
 * Chat system
-
