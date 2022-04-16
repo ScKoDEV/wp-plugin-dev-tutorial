@@ -1,1 +1,1 @@
-<h1>Koerperrechner Plugin</h1>
+<h1>SWS Plugin</h1>
