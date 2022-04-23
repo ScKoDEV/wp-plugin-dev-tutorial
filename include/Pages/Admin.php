@@ -21,6 +21,11 @@ class Admin extends BaseController
         $this->callbacks = new AdminCallbacks();
         $this->setPages();
         $this->setSubPages();
+
+        $this->setSettings();
+        $this->setSections();
+        $this->setFields();
+
        $this->settings->addPages( $this->pages )->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
     }
     public function setPages(){
@@ -63,5 +68,62 @@ class Admin extends BaseController
                 'callback' => array( $this->callbacks, 'adminCustomWidgets'),
             ]
     ];
+    }
+    public function setSettings(){
+        $args = array(
+            array(
+                'option_group' => 'sws_options_group',
+                'option_name' => 'text_example',
+                'callback' => array($this->callbacks, 'swsOptionsGroup')
+            ),
+            array(
+                'option_group' => 'sws_options_group',
+                'option_name' => 'first_name',
+            )
+            );
+
+            $this->settings->setSettings($args);
+    }
+    public function setSections(){
+        $args = array(
+            array(
+                'id' => 'sws_admin_index',
+                'title' => 'Settings',
+                'callback' => array($this->callbacks, 'swsAdminSection'),
+                'page' => 'koerperrechner_plugin'
+            )
+            );
+
+            $this->settings->setSections($args);
+    }
+    public function setFields(){
+        $args = array(
+            array(
+                'id' => 'text_example',
+                'title' => 'Text Example',
+                'callback' => array($this->callbacks, 'swsTextExample'),
+                'page' => 'koerperrechner_plugin',
+                'section' => 'sws_admin_index',
+                'args' => array(
+                    'label_for' => 'text_example',
+                    'class' => 'example-class'
+
+                )
+                ),
+                array(
+                    'id' => 'first_name',
+                    'title' => 'First Name',
+                    'callback' => array($this->callbacks, 'swsFirstName'),
+                    'page' => 'koerperrechner_plugin',
+                    'section' => 'sws_admin_index',
+                    'args' => array(
+                        'label_for' => 'first_name',
+                        'class' => 'first-name-class'
+    
+                    )
+                )
+            );
+
+            $this->settings->setFields($args);
     }
 }
